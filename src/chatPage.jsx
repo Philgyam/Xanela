@@ -34,7 +34,7 @@ export default function ChatInterface() {
       console.log('User Query:', input.trim());
 
       try {
-        const response = await axios.post('http://localhost:3000/api/botAsk', {
+        const response = await axios.post('https://xanelabackend.onrender.com/api/botAsk', {
           systemPrompt: systemPrompt,
           userQuery: input,
         });

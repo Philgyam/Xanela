@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axios from 'axios';
 
 // const API_URL = "https://fluxitudebackend.onrender.com/api"; // Ensure this is correct
-const API_URL = "http://localhost:3000/api";
+const API_URL = "https://xanelabackend.onrender.com/api";
 
 axios.defaults.withCredentials = true;
 
