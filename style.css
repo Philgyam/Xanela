@@ -1,0 +1,29 @@
+.swiper {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  .swiper-slide {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+  }
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    z-index: 20;
+  }
+  
+  .swiper:hover .swiper-button-prev,
+  .swiper:hover .swiper-button-next {
+    opacity: 1 !important;
+  }
+  
+  .swiper-fade .swiper-slide {
+    pointer-events: none;
+    transition-property: opacity;
+  }
+  
+  .swiper-fade .swiper-slide-active {
+    pointer-events: auto;
+  }
