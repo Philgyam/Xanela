@@ -105,7 +105,7 @@ Emphasize readability and clear communication of key information.${customPrompt}
       };
       setMessages(prevMessages => [...prevMessages, botMessage]);
 
-      const response = await fetch('http://localhost:4000/api/botAsk', {
+      const response = await fetch('https://xanelabackend.onrender.com/api/botAsk', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
