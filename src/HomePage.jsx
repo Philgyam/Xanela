@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { User, Lock, Mail } from 'lucide-react'; // Import LucideChat icons
+import { User, Lock, Mail,Sparkles,ArrowRight } from 'lucide-react'; // Import LucideChat icons
 import { useNavigate } from 'react-router-dom'
 
 
@@ -21,13 +21,29 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
-      <div className="relative w-full max-w-md">
-        {/* Dark glass effect background */}
-        <div className="absolute inset-0 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl" />
+    <div className="min-h-screen bg-gradient-to-br from-black to-gray-900 p-4 flex items-center justify-center">
+    <div className="w-full max-w-md">
+      {/* Main Auth Card */}
+      <div className="bg-black/50 backdrop-blur-lg border border-gray-700 rounded-xl shadow-2xl overflow-hidden">
+        {/* Header */}
+        <div className="bg-black/60 border-b border-gray-700 p-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-purple-900/20 flex items-center justify-center">
+              <Sparkles className="w-7 h-7 text-purple-400" />
+            </div>
+            <div>
+              <h3 className="text-gray-100 font-medium text-xl">
+                {isSignUp ? 'Create Account' : 'Welcome Back'}
+              </h3>
+              <p className="text-gray-400 text-sm">
+                {isSignUp ? 'Start your journey' : 'Continue your journey'}
+              </p>
+            </div>
+          </div>
+        </div>
 
-        {/* Content */}
-        <div className="relative p-8">
+        {/* Form Section */}
+        <div className="p-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={isSignUp ? 'signup' : 'signin'}
@@ -36,64 +52,72 @@ export default function AuthPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <h2 className="text-3xl font-bold text-white mb-6 text-center">
-                {isSignUp ? 'Create Account' : 'Welcome Back'}
-              </h2>
               <form className="space-y-4">
                 {isSignUp && (
-                  <Input
-                    type="text"
-                    placeholder="Full Name"
-                    className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300"
-                    prefix={<User className="w-5 h-5 text-gray-400" />}
-                  />
+                  <div className="relative">
+                    <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Input
+                      type="text"
+                      placeholder="Full Name"
+                      className="w-full bg-gray-900/70 border-gray-700 rounded-xl text-lg text-gray-100 placeholder-gray-500 h-14 pl-12"
+                    />
+                  </div>
                 )}
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300"
-                  prefix={<Mail className="w-5 h-5 text-gray-400" />}
-                />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300"
-                  prefix={<Lock className="w-5 h-5 text-gray-400" />}
-                />
-                {isSignUp && (
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    className="w-full bg-gray-900/70 border-gray-700 rounded-xl text-lg text-gray-100 placeholder-gray-500 h-14 pl-12"
+                  />
+                </div>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <Input
                     type="password"
-                    placeholder="Confirm Password"
-                    className="w-full bg-white bg-opacity-20 text-white placeholder-gray-300"
-                    prefix={<Lock className="w-5 h-5 text-gray-400" />}
+                    placeholder="Password"
+                    className="w-full bg-gray-900/70 border-gray-700 rounded-xl text-lg text-gray-100 placeholder-gray-500 h-14 pl-12"
                   />
+                </div>
+                {isSignUp && (
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Input
+                      type="password"
+                      placeholder="Confirm Password"
+                      className="w-full bg-gray-900/70 border-gray-700 rounded-xl text-lg text-gray-100 placeholder-gray-500 h-14 pl-12"
+                    />
+                  </div>
                 )}
-                <Button className="w-full bg-white text-purple-700 hover:bg-opacity-90 transition-colors">
-                  {isSignUp ? 'Sign Up' : 'Sign In'}
+                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-xl h-14 text-lg font-medium transition-all duration-200 ease-in-out transform hover:scale-105">
+                  {isSignUp ? 'Create Account' : 'Sign In'}
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </form>
             </motion.div>
           </AnimatePresence>
+        </div>
 
-          <div className="mt-6 text-center">
-            <button
-              onClick={toggleMode}
-              className="text-white hover:underline focus:outline-none mb-2"
-            >
-              {isSignUp
-                ? 'Already have an account? Sign In'
-                : "Don't have an account? Sign Up"}
-            </button>
-            {/* One Time Visitor Button */}
-            <Button 
-              onClick={handleOneTimeVisitor} 
-              className="w-full bg-gray-600 text-white hover:bg-gray-500 transition-colors"
-            >
-              One Time Visitor
-            </Button>
-          </div>
+        {/* Footer Section */}
+        <div className="border-t border-gray-700 p-6 bg-black/60">
+          <button
+            onClick={toggleMode}
+            className="w-full text-gray-300 hover:text-white mb-4 transition-colors"
+          >
+            {isSignUp
+              ? 'Already have an account? Sign In'
+              : "Don't have an account? Sign Up"}
+          </button>
+          <Button 
+            onClick={handleOneTimeVisitor} 
+            className="w-full bg-green-600 hover:bg-green-700 rounded-xl h-12 text-lg font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
+          >
+            Continue as Guest
+            <User className="ml-2 w-5 h-5" />
+          </Button>
         </div>
       </div>
     </div>
+  </div>
   )
 }
