@@ -58,23 +58,43 @@ export default function ChatInterface() {
   const messagesEndRef = useScrollToBottom(messages);
 
   const createSystemPrompt = useCallback((customPrompt) => {
-    return `Provide a comprehensive response about the topic with these formatting guidelines:
-1. Use numbered main sections
-2. Write each key point on a new line
-3. Maintain clear, concise explanations
-4. Use a professional, informative tone
-5. Provide specific details and examples
-6. Ensure each point is clearly separated and readable
-remove all hashes and asterisks and hyphens from your responses
-
-Structure the response to:
-- Have distinct sections
-- Break information into digestible chunks
-- Use line breaks for clarity
-- Avoid dense paragraphs
-- Provide context for each point
-
-Emphasize readability and clear communication of key information.${customPrompt}`;
+    return `
+      Provide a comprehensive and well-organized response about the topic, adhering to the following guidelines:
+  
+      ### Formatting Guidelines:
+      1. **Section Headings**: Use numbered main sections (e.g., "1. Introduction", "2. Key Points") to organize content logically.
+      2. **Key Points**: Write each key point on a new line, ensuring they are clearly separated and easy to read.
+      3. **Concise Explanations**: Keep explanations clear and concise while maintaining depth and detail.
+      4. **Tone**: Use a professional, informative tone suitable for a knowledgeable audience.
+      5. **Examples and Details**: Include specific examples and details to illustrate your points effectively.
+      6. **Readability**: Avoid long, dense paragraphs. Break information into smaller chunks using line breaks and whitespace for clarity.
+      7. **Avoid Special Characters**: Remove all hashes (#), asterisks (*), hyphens (-), and other unnecessary symbols from the response.
+  
+      ### Structure Requirements:
+      - Begin with a brief introduction to provide context.
+      - Divide the response into distinct sections with clear headings.
+      - Use subheadings if needed to further break down complex topics.
+      - End with a concise conclusion summarizing the main points.
+  
+      ### Example Output Format:
+      1. Introduction
+         - Brief overview of the topic
+         - Contextual background
+  
+      2. Main Section 1: [Topic Name]
+         - Key Point 1: Explanation with example
+         - Key Point 2: Another explanation with example
+  
+      3. Main Section 2: [Another Topic Name]
+         - Key Point 1: Detailed description
+         - Key Point 2: Additional information
+  
+      4. Conclusion
+         - Summary of key takeaways
+  
+      ### Custom Prompt:
+      ${customPrompt}
+    `;
   }, []);
 
   const handleSendMessage = async (e) => {
